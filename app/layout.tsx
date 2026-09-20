@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     "prompt discovery",
     "AI art prompts",
   ],
+  verification: {
+    google: "kNs_If4eKzS__0-AQ_Fu1XsNsUX9ju9KWkrA0giVEWw",
+  },  
   authors: [{ name: siteConfig.brand }],
   creator: siteConfig.brand,
   icons: {
