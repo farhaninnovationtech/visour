@@ -8,11 +8,14 @@ import AnalyticsListener from "@/components/AnalyticsListener";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+
   title: {
     default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s — ${siteConfig.name}`,
   },
+
   description: siteConfig.description,
+
   keywords: [
     "AI image prompts",
     "Midjourney prompts",
@@ -21,11 +24,19 @@ export const metadata: Metadata = {
     "prompt discovery",
     "AI art prompts",
   ],
+
+  // Google Search Console verification
+  verification: {
+    google: "kNs_If4eKzS__0-AQ_Fu1XsNsUX9ju9KWkrA0giVEWw",
+  },
+
   authors: [{ name: siteConfig.brand }],
   creator: siteConfig.brand,
+
   icons: {
     icon: "/favicon.ico",
   },
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -33,6 +44,7 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     siteName: siteConfig.name,
+
     images: [
       {
         url: "/og-image.png",
@@ -49,6 +61,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ["/og-image.png"],
   },
+
   robots: {
     index: true,
     follow: true,
@@ -57,22 +70,34 @@ export const metadata: Metadata = {
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: LayoutProps<"/">) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased">
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className="h-full antialiased"
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+        />
+
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font -- loaded once in the root layout (App Router), applies site-wide */}
+
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
         />
       </head>
+
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <a
           href="#main-content"
@@ -80,26 +105,40 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+
         <div className="grain" aria-hidden="true" />
+
         <Header />
+
         <main id="main-content" className="flex-1">
           {children}
         </main>
+
         <Footer />
+
         {GA_ID ? (
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
               strategy="afterInteractive"
             />
+
             <Script id="ga-init" strategy="afterInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_ID}', { send_page_view: true });
+
+                function gtag() {
+                  dataLayer.push(arguments);
+                }
+
+                gtag("js", new Date());
+
+                gtag("config", "${GA_ID}", {
+                  send_page_view: true,
+                });
               `}
             </Script>
+
             <AnalyticsListener />
           </>
         ) : null}
