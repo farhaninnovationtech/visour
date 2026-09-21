@@ -1,13 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-
 import { siteConfig } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const siteTitle = `${siteConfig.name} — ${siteConfig.tagline}`;
-
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
